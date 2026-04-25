@@ -38,7 +38,7 @@ function requireApprovedStudentAccess() {
     if (role !== "student" || !email) {
         clearUserSession();
         setLoginError("Please login with an approved student account.");
-        window.location.href = "index.html";
+        window.location.href = "/";
         return null;
     }
 
@@ -55,7 +55,7 @@ function requireApprovedStudentAccess() {
         } else {
             setLoginError("Please login with an approved student account.");
         }
-        window.location.href = "index.html";
+        window.location.href = "/";
         return null;
     }
 
@@ -76,7 +76,7 @@ async function login() {
         if (email === "hod@college.com" && password === "hod123") {
             localStorage.setItem("loggedInRole", "hod");
             localStorage.setItem("loggedInUserEmail", email);
-            window.location.href = "hod.html";
+            window.location.href = "/dashboard/";
         } else {
             error.innerText = "Invalid HOD credentials!";
         }
@@ -93,7 +93,7 @@ async function login() {
 
             localStorage.setItem("loggedInRole", "faculty");
             localStorage.setItem("loggedInUserEmail", email);
-            window.location.href = "faculty.html";
+            window.location.href = "/faculty/";
 
         } else {
             error.innerText = "Invalid Faculty credentials!";
@@ -120,7 +120,7 @@ async function login() {
 
             localStorage.setItem("loggedInRole", "student");
             localStorage.setItem("loggedInUserEmail", normalizeEmail(email));
-            window.location.href = "student.html";
+            window.location.href = "/student/";
 
         } else {
             error.innerText = "Invalid Student credentials!";
@@ -704,7 +704,7 @@ async function saveStaffAttendance() {
 }
 
 function logout() {
-    window.location.href = "index.html";
+    window.location.href = "/";
 }
 
 function go(page) {
@@ -1129,7 +1129,7 @@ async function populateRegistrationClasses() {
 }
 
 function getRegistrationLink() {
-    const registrationUrl = new URL("register.html", window.location.href);
+    const registrationUrl = new URL("/register/", window.location.origin);
     registrationUrl.searchParams.set("view", "student");
     return registrationUrl.href;
 }
@@ -1641,7 +1641,7 @@ async function loadStudentDashboard() {
 
 function openStudentSubjectDetail(subjectId) {
     if (!subjectId) return;
-    window.location.href = `student_subject_detail.html?subject=${encodeURIComponent(subjectId)}`;
+    window.location.href = `/student_subject_detail/?subject=${encodeURIComponent(subjectId)}`;
 }
 
 function renderSemesterSubjectCards(subjects) {
@@ -2061,16 +2061,16 @@ function loadRoleSidebar() {
 
     if (role === "faculty") {
         sidebar.innerHTML = `
-            <a href="faculty.html">Faculty Dashboard</a>
-            <a href="print_student.html">PTM Report</a>
-            <a href="index.html">Logout</a>
+            <a href="/faculty/">Faculty Dashboard</a>
+            <a href="/print_student/">PTM Report</a>
+            <a href="/">Logout</a>
         `;
     }
     else if (role === "hod") {
         sidebar.innerHTML = `
-            <a href="hod.html">HOD Dashboard</a>
-            <a href="print_student.html">PTM Report</a>
-            <a href="index.html">Logout</a>
+            <a href="/dashboard/">HOD Dashboard</a>
+            <a href="/print_student/">PTM Report</a>
+            <a href="/">Logout</a>
         `;
     }
 }
@@ -3615,20 +3615,20 @@ function rejectLeave(index) {
 }
 
 function highlightActiveNav() {
-    const currentFile = window.location.pathname.split("/").pop().toLowerCase();
+    const currentFile = window.location.pathname.replace(/\/$/, "").split("/").pop().toLowerCase();
     const links = document.querySelectorAll(".sidebar a");
 
     links.forEach(link => {
         const href = (link.getAttribute("href") || "").toLowerCase();
-        if (href === currentFile) {
+        if (href === currentFile || href === `/${currentFile}/`) {
             link.classList.add("active");
         }
     });
 }
 
 function addAutoBackButton() {
-    const pagesWithoutBack = ["index.html", "hod.html", "faculty.html", "student.html"];
-    const currentFile = window.location.pathname.split("/").pop().toLowerCase();
+    const pagesWithoutBack = ["", "hod", "faculty", "student"];
+    const currentFile = window.location.pathname.replace(/\/$/, "").split("/").pop().toLowerCase();
 
     if (pagesWithoutBack.includes(currentFile)) {
         return;
@@ -4324,19 +4324,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     await ensureBackendData();
 
     const currentPage = window.location.pathname.split("/").pop().toLowerCase();
-    const approvedStudentOnlyPages = new Set([
-        "student.html",
-        "student_semester_details.html",
-        "student_subject_detail.html",
-        "student_leave.html",
-        "student_leave_status.html"
-    ]);
+    const approvedStudentOnlyPages = new Set(["student", "student_semester_details", "student_subject_detail", "student_leave", "student_leave_status"]);
 
     if (approvedStudentOnlyPages.has(currentPage) && !requireApprovedStudentAccess()) {
         return;
     }
 
-    if (currentPage === "print_student.html" &&
+    if (currentPage === "print_student" &&
         localStorage.getItem("loggedInRole") === "student" &&
         !requireApprovedStudentAccess()) {
         return;

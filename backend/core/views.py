@@ -1,5 +1,7 @@
 from django.db.models import Prefetch
+from django.http import Http404
 from django.shortcuts import render
+from django.template import TemplateDoesNotExist
 from rest_framework.exceptions import ValidationError
 from rest_framework import filters, status, viewsets
 from rest_framework.decorators import api_view
@@ -32,6 +34,34 @@ from .serializers import (
     SubjectSerializer,
     SubmissionSerializer,
 )
+
+
+def home(request):
+    return render(request, "index.html")
+
+
+def login_view(request):
+    return render(request, "index.html")
+
+
+def dashboard(request):
+    return render(request, "hod.html")
+
+
+def student(request):
+    return render(request, "student.html")
+
+
+def faculty(request):
+    return render(request, "faculty.html")
+
+
+def render_page(request, page_name):
+    template_name = f"{page_name}.html"
+    try:
+        return render(request, template_name)
+    except TemplateDoesNotExist:
+        raise Http404("Page not found")
 
 
 def get_logged_in_student(request):
