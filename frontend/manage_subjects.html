@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Subjects</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="loadSubjects()">
+
+<div class="sidebar">
+    <a href="hod.html">Dashboard</a>
+    <a href="manage_subjects.html">Manage Subjects</a>
+    <a href="assign_subject.html">Assign Subject</a>
+    <a href="index.html">Logout</a>
+</div>
+
+<div class="main">
+
+<div class="header">
+    <h2>Subject Management</h2>
+</div>
+
+<div class="card">
+    <p id="subjectFormModeText">Add a new subject using name, code and class.</p>
+
+    <input type="text" id="subjectNameInput" placeholder="Subject Name">
+    <input type="text" id="subjectCodeInput" placeholder="Subject Code">
+    <select id="subjectClassInput"></select>
+
+    <div class="attendance-action-group">
+        <button id="subjectSubmitButton" onclick="addSubject()" class="btn-primary">
+            Add Subject
+        </button>
+        <button id="subjectCancelEditButton" onclick="cancelSubjectEdit()" class="btn-danger" style="display:none;">
+            Cancel Edit
+        </button>
+    </div>
+
+    <hr>
+
+    <div class="attendance-filter-bar">
+        <select id="subjectFilterClassInput" aria-label="Filter subjects by class">
+            <option value="all">Show All Classes</option>
+        </select>
+    </div>
+
+    <table width="100%">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Code</th>
+                <th>Class</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="subjectTable"></tbody>
+
+    </table>
+
+</div>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
+
+

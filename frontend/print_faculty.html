@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Faculty Semester Report</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="loadFacultyReport()">
+
+<div class="header">
+    <h2>Faculty Semester Subject Report</h2>
+    <button class="btn-primary" onclick="window.print()">Print</button>
+    <button class="btn-danger" onclick="go('faculty.html')">Back</button>
+</div>
+
+<div class="container">
+
+    <h3>Subject: Web Development</h3>
+    <h4>Class: BVoc SY</h4>
+
+    <hr>
+
+    <h3>Lecture Summary</h3>
+    <p>Total Lectures Conducted: <span id="totalLectures">0</span></p>
+
+    <hr>
+
+    <h3>Attendance Summary</h3>
+    <table border="1" width="100%" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Present</th>
+                <th>Absent</th>
+            </tr>
+        </thead>
+        <tbody id="attendanceReport">
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h3>Marks Summary</h3>
+    <table border="1" width="100%" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Exam Type</th>
+                <th>Marks</th>
+            </tr>
+        </thead>
+        <tbody id="marksReport">
+        </tbody>
+    </table>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
+
+

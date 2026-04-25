@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HOD Dashboard | Academic ERP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="loadDashboard()">
+
+<div class="sidebar">
+    <a href="hod.html">Dashboard</a>
+    <a href="register.html">Registration</a>
+    <a href="approve_students.html">Approve Students</a>
+    <a href="manage_faculty.html">Manage Faculty</a>
+    <a href="manage_classes.html">Manage Classes</a>
+    <a href="hod_leave.html">Leave Approval</a>
+    <a href="print_student.html">PTM Student Report</a>
+    <a href="manage_subjects.html">Manage Subjects</a>
+    <a href="assign_subject.html">Assign Subject</a>
+    <a href="index.html">Logout</a>
+</div>
+
+<div class="main">
+
+    <div class="header">
+        <h2>HOD Dashboard</h2>
+    </div>
+
+    <div class="tab-bar">
+        <button id="facultyTabButton" class="tab-button active" onclick="showDashboardTab('faculty')">Faculty</button>
+        <button id="studentsTabButton" class="tab-button" onclick="showDashboardTab('students')">Students</button>
+        <button id="classesTabButton" class="tab-button" onclick="showDashboardTab('classes')">Classes</button>
+        <button id="staffAttendanceTabButton" class="tab-button" onclick="showDashboardTab('staffAttendance')">Staff Attendance</button>
+    </div>
+
+    <div id="facultySection" class="dashboard-section active">
+        <div class="cards">
+            <div class="card">
+                <h3 id="facultyCount">0</h3>
+                <p>Total Faculty</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Faculty List</h3>
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody id="dashboardFacultyTable"></tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Assigned Subjects And Classes</h3>
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>Faculty</th>
+                        <th>Class</th>
+                        <th>Subject</th>
+                        <th>Weekly Timetable</th>
+                    </tr>
+                </thead>
+                <tbody id="dashboardAssignmentTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="studentsSection" class="dashboard-section">
+        <div class="cards">
+            <div class="card">
+                <h3 id="studentCount">0</h3>
+                <p>Total Students</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                <div>
+                    <h3 class="mb-1">Class-Wise Grouping</h3>
+                    <p class="mb-0">Select a class to load only that class's approved students.</p>
+                </div>
+                <span id="dashboardSelectedClassBadge" class="badge text-bg-light">No class selected</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Total Students</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dashboardStudentGroupTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                <div>
+                    <h3 class="mb-1">Student List</h3>
+                    <p class="mb-0">The selected class appears here instantly without reloading the page.</p>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped align-middle mb-0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Roll No</th>
+                            <th>Class</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dashboardStudentTable"></tbody>
+                </table>
+            </div>
+            <div id="dashboardStudentTableMessage" class="mt-3 text-muted"></div>
+        </div>
+    </div>
+
+    <div id="classesSection" class="dashboard-section">
+        <div class="cards">
+            <div class="card">
+                <h3 id="classCount">0</h3>
+                <p>Total Classes</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Class List</h3>
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>Class Name</th>
+                    </tr>
+                </thead>
+                <tbody id="dashboardClassTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="staffAttendanceSection" class="dashboard-section">
+        <div class="card">
+            <h3>Mark Staff Attendance</h3>
+            <div class="row g-3 align-items-end">
+                <div class="col-md-4">
+                    <label for="staffAttendanceDate" class="form-label">Attendance Date</label>
+                    <input type="date" id="staffAttendanceDate" class="form-control" onchange="handleStaffAttendanceDateChange()">
+                </div>
+                <div class="col-md-auto">
+                    <button type="button" class="btn btn-primary btn-primary" onclick="saveStaffAttendance()">Save Staff Attendance</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Faculty Attendance</h3>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle mb-0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Faculty Name</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="staffAttendanceTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <div>
+                    <h3 class="mb-1">Saved Staff Attendance</h3>
+                    <p class="mb-0">The selected date's attendance appears here right after saving.</p>
+                </div>
+                <span id="savedStaffAttendanceCount" class="badge text-bg-light">0 records</span>
+            </div>
+            <div class="table-responsive mt-3">
+                <table class="table table-striped table-hover align-middle mb-0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Faculty Name</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="savedStaffAttendanceTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+
+</html>
+
+

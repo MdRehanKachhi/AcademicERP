@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assign Subject</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="loadAssignmentOptions()">
+
+<div class="sidebar">
+    <a href="hod.html">Dashboard</a>
+    <a href="manage_subjects.html">Manage Subjects</a>
+    <a href="assign_subject.html">Assign Subject</a>
+    <a href="index.html">Logout</a>
+</div>
+
+<div class="main">
+
+<div class="header">
+    <h2>Assign Subject to Faculty</h2>
+</div>
+
+<div class="card">
+    <p id="assignmentFormModeText">Select class first, then assign an available subject to a faculty member.</p>
+
+    <label>Class</label>
+    <select id="assignClass"></select>
+    <p class="assignment-status-text">Select a class to load only that class's subjects and faculty assignments.</p>
+
+    <label>Subject</label>
+    <select id="assignSubject"></select>
+    <p id="subjectAssignmentStatus" class="assignment-status-text"></p>
+
+    <label>Faculty</label>
+    <select id="assignFaculty"></select>
+
+    <label class="checkbox-row">
+        <input type="checkbox" id="addTimetableToggle" onchange="toggleWeeklyTimetable()">
+        <span>Add weekly timetable now</span>
+    </label>
+
+    <div id="weeklyTimetableCard" class="timetable-editor" style="display: none;">
+        <h3>Weekly Timetable</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Time / Period</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Monday</td>
+                    <td><input type="text" id="slot-monday" placeholder="e.g. 9:00 AM - 10:00 AM"></td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td><input type="text" id="slot-tuesday" placeholder="e.g. Period 2"></td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td><input type="text" id="slot-wednesday" placeholder="e.g. 11:00 AM - 12:00 PM"></td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td><input type="text" id="slot-thursday" placeholder="e.g. Lab 1"></td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                    <td><input type="text" id="slot-friday" placeholder="e.g. Period 4"></td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td><input type="text" id="slot-saturday" placeholder="e.g. 10:00 AM - 11:00 AM"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="attendance-action-group">
+        <button id="assignmentSubmitButton" onclick="assignSubject()" class="btn-primary">
+            Assign
+        </button>
+        <button id="assignmentCancelEditButton" onclick="cancelAssignmentEdit()" class="btn-danger" style="display:none;">
+            Cancel Edit
+        </button>
+    </div>
+
+</div>
+
+<div class="card">
+    <h3>Current Faculty Subject Assignments</h3>
+    <label for="assignmentSearch">Search Faculty Assignments</label>
+    <input
+        type="text"
+        id="assignmentSearch"
+        placeholder="Search by faculty, email, class or subject"
+        oninput="loadAssignmentsTable()"
+    >
+    <table id="assignmentTable">
+        <thead>
+            <tr>
+                <th>Class</th>
+                <th>Subject</th>
+                <th>Faculty</th>
+                <th>Email</th>
+                <th>Weekly Timetable</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="assignmentTableBody"></tbody>
+    </table>
+</div>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
+
+

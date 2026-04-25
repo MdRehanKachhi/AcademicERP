@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subject Detail | Academic ERP</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="loadStudentSubjectDetail()">
+
+<div class="sidebar">
+    <a href="student.html">Dashboard</a>
+    <a href="student_semester_details.html">Semester Details</a>
+    <a href="student_leave.html">Apply Leave</a>
+    <a href="student_leave_status.html">Leave Status</a>
+    <a href="print_student.html">View Report</a>
+    <a href="index.html">Logout</a>
+</div>
+
+<div class="main">
+    <div class="header">
+        <div>
+            <h2 id="subjectDetailTitle">Subject Details</h2>
+            <p id="subjectDetailMeta">Loading subject summary.</p>
+        </div>
+    </div>
+
+    <div id="subjectDetailContent">
+        <div class="cards subject-summary-cards">
+            <div class="card">
+                <h3 id="subjectAttendancePercentage">0%</h3>
+                <p>Attendance Percentage</p>
+            </div>
+            <div class="card">
+                <h3 id="subjectAttendancePresent">0</h3>
+                <p>Present Classes</p>
+            </div>
+            <div class="card">
+                <h3 id="subjectAttendanceTotal">0</h3>
+                <p>Total Classes</p>
+            </div>
+            <div class="card">
+                <h3 id="subjectMarksTotal">0</h3>
+                <p>Total Marks</p>
+            </div>
+            <div class="card">
+                <h3 id="subjectMarksAverage">0</h3>
+                <p>Average Marks</p>
+            </div>
+        </div>
+
+        <div class="subject-detail-layout">
+            <div class="card">
+                <h3>Attendance</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="subjectAttendanceTableBody"></tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>Assignments</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Marks</th>
+                        </tr>
+                    </thead>
+                    <tbody id="subjectAssignmentTableBody"></tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>Exam Marks</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Exam Type</th>
+                            <th>Marks</th>
+                        </tr>
+                    </thead>
+                    <tbody id="subjectMarksTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

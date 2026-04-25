@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PTM Student Report</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="loadStudentDropdown(); loadRoleSidebar();">
+<div class="sidebar" id="roleSidebar">
+</div>
+
+
+<div class="main">
+
+    <!-- PRINT HEADER -->
+    <div class="print-header">
+
+        <div class="college-header">
+            <h2>Gramin Technical and Management Campus</h2>
+            <p>Department of Computer Applications</p>
+            <p>Academic ERP - Student PTM Report</p>
+        </div>
+
+        <hr>
+
+    </div>
+
+    <!-- BUTTON (HIDDEN IN PRINT) -->
+    <div class="header no-print">
+        <button class="btn-primary" id="printBtn" onclick="printReport()" disabled>
+            Print Report
+        </button>
+    </div>
+
+    <!-- REPORT CARD -->
+    <div class="card report-card">
+
+        <div id="studentSelectorWrap" class="no-print">
+            <label>Select Student:</label>
+            <select id="studentSelect" onchange="loadStudentReport()">
+                <option value="">-- Select Student --</option>
+            </select>
+        </div>
+
+        <hr>
+
+        <h3>Student Information</h3>
+
+        <p><strong>Name:</strong> <span id="reportName"></span></p>
+        <p><strong>Roll Number:</strong> <span id="reportRoll"></span></p>
+        <p><strong>Class:</strong> <span id="reportClass"></span></p>
+
+        <hr>
+
+        <h3>Attendance Summary</h3>
+
+        <p>Total Lectures: <span id="totalLectures"></span></p>
+        <p>Present: <span id="presentCount"></span></p>
+        <p>Absent: <span id="absentCount"></span></p>
+        <p>Attendance Percentage: <span id="attendancePercentage"></span>%</p>
+
+        <hr>
+
+        <h3>Marks Summary</h3>
+
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th>Exam Type</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody id="reportMarks"></tbody>
+        </table>
+
+        <br>
+    </div>
+
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Faculty</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="loadFacultyList()">
+
+<div class="sidebar">
+    <a href="hod.html">Dashboard</a>
+    <a href="manage_faculty.html">Manage Faculty</a>
+    <a href="index.html">Logout</a>
+</div>
+
+<div class="main">
+
+    <div class="header">
+        <h2>Faculty Management</h2>
+    </div>
+
+    <div class="card">
+
+        <h3 id="facultyFormTitle">Add Faculty</h3>
+        <p id="facultyFormStatus" class="registration-status" style="display:none;"></p>
+
+        <form id="facultyForm" class="registration-form" onsubmit="saveFaculty(event)" novalidate>
+            <input type="hidden" id="facultyId">
+
+            <div class="form-grid form-grid-2">
+                <div class="form-field">
+                    <label for="facultyName">Faculty Name *</label>
+                    <input type="text" id="facultyName" placeholder="Faculty Name" required>
+                    <small class="field-error" data-error-for="name"></small>
+                </div>
+
+                <div class="form-field">
+                    <label for="facultyEmail">Faculty Email *</label>
+                    <input type="email" id="facultyEmail" placeholder="Faculty Email" required>
+                    <small class="field-error" data-error-for="email"></small>
+                </div>
+            </div>
+
+            <div class="form-grid form-grid-2">
+                <div class="form-field">
+                    <label for="facultyMobileNumber">Mobile Number *</label>
+                    <input type="tel" id="facultyMobileNumber" placeholder="10-digit mobile number" inputmode="numeric" maxlength="10" required>
+                    <small class="field-error" data-error-for="mobile_number"></small>
+                </div>
+
+                <div class="form-field">
+                    <label for="facultyExperience">Experience (Months) *</label>
+                    <input type="number" id="facultyExperience" placeholder="Experience in months" min="0" required>
+                    <small class="field-error" data-error-for="experience"></small>
+                </div>
+            </div>
+
+            <div class="form-grid form-grid-2">
+                <div class="form-field">
+                    <label for="facultyQualification">Qualification</label>
+                    <input type="text" id="facultyQualification" placeholder="Qualification">
+                    <small class="field-error" data-error-for="qualification"></small>
+                </div>
+
+                <div class="form-field">
+                    <label for="facultyCaste">Caste</label>
+                    <select id="facultyCaste">
+                        <option value="">Select Caste</option>
+                        <option value="Open">Open</option>
+                        <option value="OBC">OBC</option>
+                        <option value="SC">SC</option>
+                        <option value="ST">ST</option>
+                        <option value="SBC">SBC</option>
+                        <option value="NT">NT</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <small class="field-error" data-error-for="caste"></small>
+                </div>
+            </div>
+
+            <div class="form-grid form-grid-2">
+                <div class="form-field">
+                    <label for="facultySubCaste">Sub Caste</label>
+                    <input type="text" id="facultySubCaste" placeholder="Sub Caste">
+                    <small class="field-error" data-error-for="sub_caste"></small>
+                </div>
+
+                <div class="form-field">
+                    <label for="facultyDistrict">District *</label>
+                    <select id="facultyDistrict" onchange="handleFacultyDistrictChange()" required>
+                        <option value="">Select District</option>
+                    </select>
+                    <small class="field-error" data-error-for="district"></small>
+                </div>
+            </div>
+
+            <div class="form-grid form-grid-2">
+                <div class="form-field">
+                    <label for="facultyTaluka">Taluka *</label>
+                    <select id="facultyTaluka" required>
+                        <option value="">Select Taluka</option>
+                    </select>
+                    <small class="field-error" data-error-for="taluka"></small>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label for="facultyAddress">Address *</label>
+                <textarea id="facultyAddress" placeholder="Faculty Address" required></textarea>
+                <small class="field-error" data-error-for="address"></small>
+            </div>
+
+            <div class="registration-actions">
+                <button id="addFacultyButton" type="submit" class="btn-primary">Save Faculty</button>
+                <button type="button" class="btn-danger" onclick="resetFacultyForm()" id="cancelFacultyEditButton" style="display:none;">Cancel Edit</button>
+            </div>
+        </form>
+
+        <hr>
+
+        <h3>Faculty List</h3>
+
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Qualification</th>
+                    <th>Experience</th>
+                    <th>District</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="facultyTable"></tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Marks Module</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="loadFacultyClasses()">
+<div class="sidebar">
+    <a href="faculty.html">Dashboard</a>
+    <a href="attendance.html">Attendance</a>
+    <a href="marks.html">Marks</a>
+    <a href="index.html">Logout</a>
+</div>
+
+<div class="main">
+
+    <div class="header">
+        <h2>Marks Module</h2>
+    </div>
+
+    <div class="card">
+
+        <label>Select Class</label>
+        <select id="marksClass" onchange="loadFacultySubjects()"></select>
+
+        <label>Select Subject</label>
+        <select id="marksSubject" onchange="loadMarksTable(); loadStudentsDropdown();"></select>
+        <br>
+        <label>Select Student</label>
+        <select id="marksStudent"></select>
+        <br>
+        <label>Enter Marks</label>
+<input type="number" id="studentMarksInput">
+<br>
+        <label>Select Exam Type</label>
+       <select id="examType" onchange="loadMarksTable()">
+            <option value="">All Tests</option>
+            <option value="Class Test">Class Test</option>
+            <option value="Mid Exam">Mid Exam</option>
+            <option value="Assignment">Assignment</option>
+        </select>
+
+
+        <hr>
+
+        <table width="100%">
+            <thead>
+                <tr> 
+                    <th>Student Name</th>
+                    <th>Exam Type</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+
+            <tbody id="marksTableBody"></tbody>
+
+        </table>
+
+        <br>
+
+        <button onclick="saveSubjectWiseMarks()" class="btn-primary">
+            Save Marks
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+
+</html>
+
+
