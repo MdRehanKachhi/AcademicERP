@@ -37,13 +37,13 @@ def get_env(name, default=None):
 # ==============================
 SECRET_KEY = get_env("DJANGO_SECRET_KEY", "django-insecure-dev-key")
 
-DEBUG = get_env("DJANGO_DEBUG", "True").lower() == "true"
+DEBUG = get_env("DJANGO_DEBUG", "False").lower() == "true"
 
 ALLOWED_HOSTS = [
     host.strip()
     for host in get_env(
         "DJANGO_ALLOWED_HOSTS",
-        "127.0.0.1,localhost,academicerp-a9rb.onrender.com"
+        "*"
     ).split(",")
     if host.strip()
 ]
