@@ -1,4 +1,5 @@
 from django.db.models import Prefetch
+from django.shortcuts import render
 from rest_framework.exceptions import ValidationError
 from rest_framework import filters, status, viewsets
 from rest_framework.decorators import api_view
@@ -553,3 +554,7 @@ class StaffAttendanceViewSet(SearchableModelViewSet):
     serializer_class = StaffAttendanceSerializer
     search_fields = ["faculty__name", "faculty__email", "status", "date"]
     ordering = ["-date"]
+
+
+def home(request):
+    return render(request, 'index.html')

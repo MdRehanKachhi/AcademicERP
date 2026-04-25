@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head>`n    {% load static %}
     <title>PTM Student Report</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body onload="loadStudentDropdown(); loadRoleSidebar();">
 <div class="sidebar" id="roleSidebar">
@@ -78,8 +78,8 @@
 
 </div>
 
-<script src="js/api.js"></script>
-<script src="js/app.js"></script>
+<script src="{% static 'js/api.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
 </body>
 </html>
 
