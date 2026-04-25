@@ -39,7 +39,6 @@ SECRET_KEY = get_env("DJANGO_SECRET_KEY", "django-insecure-dev-key")
 
 DEBUG = get_env("DJANGO_DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS =import os
 
 ALLOWED_HOSTS = ['*']
 # ==============================
