@@ -4323,7 +4323,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await checkBackendConnection();
     await ensureBackendData();
 
-    const currentPage = window.location.pathname.split("/").pop().toLowerCase();
+    const currentPage = window.location.pathname.replace(/\/$/, "").split("/").pop().toLowerCase();
     const approvedStudentOnlyPages = new Set(["student", "student_semester_details", "student_subject_detail", "student_leave", "student_leave_status"]);
 
     if (approvedStudentOnlyPages.has(currentPage) && !requireApprovedStudentAccess()) {
